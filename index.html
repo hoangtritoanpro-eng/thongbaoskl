@@ -76,8 +76,8 @@
     .form-group { display: flex; flex-direction: column; }
     .form-group.full-width { grid-column: span 2; }
     label { font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 8px; text-transform: uppercase;}
-    input, textarea { padding: 14px 16px; border: 1px solid #cbd5e1; border-radius: 12px; font-family: inherit; font-size: 14px; outline: none; background: #f8fafc;}
-    input:focus, textarea:focus { border-color: var(--primary-blue); background: white;}
+    input, textarea, select { padding: 14px 16px; border: 1px solid #cbd5e1; border-radius: 12px; font-family: inherit; font-size: 14px; outline: none; background: #f8fafc;}
+    input:focus, textarea:focus, select:focus { border-color: var(--primary-blue); background: white;}
     textarea { height: 80px; resize: none; line-height: 1.5;}
     
     /* MODAL LỊCH SỬ CHUNG */
@@ -170,10 +170,22 @@
         </div>
 
         <div class="form-grid">
-          <div class="form-group full-width">
-            <label style="color: #e52e71;"><i class="fa-solid fa-key"></i> GEMINI API KEY (TÙY CHỌN)</label>
-            <input type="password" id="inp-apikey" placeholder="Nhập mã khóa API... (Để trống nếu dùng khóa của hệ thống)">
+          <div class="form-group">
+            <label style="color: #e52e71;"><i class="fa-solid fa-key"></i> GEMINI API KEY</label>
+            <input type="password" id="inp-apikey" placeholder="Để trống nếu dùng mặc định">
           </div>
+          
+          <div class="form-group">
+            <label style="color: #0f548c;"><i class="fa-solid fa-microchip"></i> PHIÊN BẢN AI GEMINI</label>
+            <select id="inp-model" style="color: #1e293b; font-weight: 600;">
+              <option value="gemini-2.5-flash">Gemini 2.5 Flash</option>
+              <option value="gemini-2.5-flash-lite">Gemini 2.5 Flash-Lite (Siêu nhanh)</option>
+              <option value="gemini-3.0-flash">Gemini 3.0 Flash</option>
+              <option value="gemini-3.5-flash" selected>Gemini 3.5 Flash (Bản chuẩn)</option>
+              <option value="gemini-3.5-flash-lite">Gemini 3.5 Flash-Lite</option>
+            </select>
+          </div>
+
           <div class="form-group full-width">
             <label>Lớp áp dụng (Có thể để trống)</label>
             <input type="text" id="inp-lop" placeholder="VD: 6/1, 8/5...">
@@ -256,11 +268,17 @@
     content.innerHTML = "<div style='text-align: center; margin-top: 20px;'><i class='fa-solid fa-circle-notch fa-spin fa-2x' style='color: #0068ff;'></i><br><br><b>Đang kết nối AI...</b></div>";
     
     let danhXung = document.querySelector('input[name="danhxung"]:checked').value;
+    
     const formData = {
-      apiKey: document.getElementById('inp-apikey').value, danhXung: danhXung,
-      tenLop: document.getElementById('inp-lop').value, suKien: document.getElementById('inp-sukien').value,
-      thoiLuong: document.getElementById('inp-thoiluong').value, ngayBatDau: document.getElementById('inp-ngaybatdau').value,
-      ngayDiHocLai: document.getElementById('inp-ngaydihoclai').value, yeuCau: document.getElementById('inp-yeucau').value
+      apiKey: document.getElementById('inp-apikey').value, 
+      modelVersion: document.getElementById('inp-model').value, 
+      danhXung: danhXung,
+      tenLop: document.getElementById('inp-lop').value, 
+      suKien: document.getElementById('inp-sukien').value,
+      thoiLuong: document.getElementById('inp-thoiluong').value, 
+      ngayBatDau: document.getElementById('inp-ngaybatdau').value,
+      ngayDiHocLai: document.getElementById('inp-ngaydihoclai').value, 
+      yeuCau: document.getElementById('inp-yeucau').value
     };
 
     try {
