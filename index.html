@@ -229,6 +229,7 @@
 <div id="toast">Module đang phát triển. Sẽ sớm ra mắt!</div>
 
 <script>
+  // ĐƯỜNG LINK API TỰ ĐỘNG ĐỒNG BỘ CỦA THẦY TOÀN
   const API_URL = "https://script.google.com/macros/s/AKfycbzBbEeVLFlvZmAWGV8QhoXVJ4xCEfHbBIqE9K0xlgrhwMJpItxH5Dloak-9UsjbtWKTlw/exec";
 
   async function callBackend(action, payload) {
@@ -285,7 +286,7 @@
 
     try {
       const result = await callBackend('generate', formData);
-      document.getElementById('zalo-content').innerText = result.replace(/\*/g, '');
+      document.getElementById('zalo-content').innerText = result;
     } catch (e) {
       document.getElementById('zalo-content').innerText = "Lỗi kết nối: " + e;
     }
